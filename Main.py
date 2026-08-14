@@ -168,15 +168,15 @@ class SecondScreen(QWidget):
         )
     def go_to_next_screen(self):
         self.hide()
-        self.ind = (4*(int(self.result_text1.text())+int(self.result_text2.text())+int(self.result_text3.text()))-200)/10
-        self.third_screen = ThirdScreen(self.ind, self.age_input)
+        self.index = (4*(int(self.result_text1.text())+int(self.result_text2.text())+int(self.result_text3.text()))-200)/10
+        self.third_screen = ThirdScreen(self.index, self.age_input)
         self.third_screen.show()
+
 class ThirdScreen(QWidget):
-    def __init__(self, ind, age_input):
+    def __init__(self, index, age_input):
         super().__init__()
 
-        self.ind = ind
-
+        self.index = index
         self.age_input = age_input
 
         self.initUI()
@@ -186,10 +186,10 @@ class ThirdScreen(QWidget):
     def initUI(self):
         v_box = QVBoxLayout()
 
-        label = QLabel(Textruffie.txt_index + str(self.ind))
+        label = QLabel(Textruffie.txt_index + str(self.index))
         label.setFont(font)
 
-        label2 = QLabel(Textruffie.txt_workheart)
+        label2 = QLabel(Textruffie.txt_workheart + self.get_workheart())
         label2.setFont(font)
 
         v_box.addWidget(label)
@@ -197,12 +197,73 @@ class ThirdScreen(QWidget):
 
         self.setLayout(v_box)
 
+    def get_workheart(self):
+        age = int(self.age_input.text())
+        index = self.index
+
+        if age >= 15:
+            if index >= 15:
+                return Textruffie.txt_res1
+            elif index >= 11:
+                return Textruffie.txt_res2
+            elif index >= 6:
+                return Textruffie.txt_res3
+            elif index >= 0.5:
+                return Textruffie.txt_res4
+            else:
+                return Textruffie.txt_res5
+
+        elif age >= 13:
+            if index >= 16.5:
+                return Textruffie.txt_res1
+            elif index >= 12.5:
+                return Textruffie.txt_res2
+            elif index >= 7.5:
+                return Textruffie.txt_res3
+            elif index >= 2:
+                return Textruffie.txt_res4
+            else:
+                return Textruffie.txt_res5
+
+        elif age >= 11:
+            if index >= 18:
+                return Textruffie.txt_res1
+            elif index >= 14:
+                return Textruffie.txt_res2
+            elif index >= 9:
+                return Textruffie.txt_res3
+            elif index >= 3.5:
+                return Textruffie.txt_res4
+            else:
+                return Textruffie.txt_res5
+
+        elif age >= 9:
+            if index >= 19.5:
+                return Textruffie.txt_res1
+            elif index >= 15.5:
+                return Textruffie.txt_res2
+            elif index >= 10.5:
+                return Textruffie.txt_res3
+            elif index >= 5:
+                return Textruffie.txt_res4
+            else:
+                return Textruffie.txt_res5
+
+        else:
+            if index >= 21:
+                return Textruffie.txt_res1
+            elif index >= 17:
+                return Textruffie.txt_res2
+            elif index >= 12:
+                return Textruffie.txt_res3
+            elif index >= 6.5:
+                return Textruffie.txt_res4
+            else:
+                return Textruffie.txt_res5
 
     def set_appear(self):    
         self.setWindowTitle(Textruffie.txt_title)
-
         self.move(Textruffie.win_x, Textruffie.win_y)
-
         self.resize(Textruffie.win_width, Textruffie.win_height)
 
 app = QApplication([])
